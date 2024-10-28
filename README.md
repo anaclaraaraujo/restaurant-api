@@ -16,6 +16,48 @@
   </a>
 </p>
 
+## Diagrama ER
+```mermaid
+erDiagram
+    ORDERS {
+        int id PK
+        int table_session_id FK
+        int product_id FK
+        int quantity
+        float price
+        datetime created_at
+        datetime updated_at
+    }
+
+    PRODUCTS {
+        int id PK
+        string name
+        float price
+        datetime created_at
+        datetime updated_at
+    }
+
+    TABLES {
+        int id PK
+        int table_number
+        datetime created_at
+        datetime updated_at
+    }
+
+    TABLES_SESSIONS {
+        int id PK
+        int table_id FK
+        datetime opened_at
+        datetime closed_at
+    }
+
+    ORDERS ||--o{ PRODUCTS : contains
+    ORDERS ||--o{ TABLES_SESSIONS : belongs_to
+    TABLES_SESSIONS ||--|{ TABLES : includes
+
+```
+
+
 ## Funcionalidades
 - **Gerenciamento de Mesas:** Criação, atualização e fechamento de mesas, incluindo o controle de sessões ativas de mesas.
 
